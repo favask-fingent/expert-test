@@ -1,3 +1,64 @@
+# 🛠 Bug Fixes Documentation – Lead Capture Form (v1.0.1)
+
+## Overview
+
+This document outlines the major bugs that were discovered and resolved in the
+Lead Capture Form component.
+
+---
+
+## Critical Fixes Implemented
+
+### 1. Missing Database Save for Leads and Duplicate Confirmation Email Invocation
+**File**: src/components/LeadCaptureForm.tsx  
+**Severity**: Critical  
+**Status**: Fixed  
+
+#### Problem  
+Lead data submitted via the form was not being saved to the Supabase "leads" table.  
+Additionally, the confirmation email function "send-confirmation" was invoked twice, causing redundant emails to be sent.
+
+#### Root Cause  
+The handleSubmit function did not include any code to insert the lead data into the database.  
+There was also a duplicate call to send confirmation emails.
+
+#### Fix  
+Added a Supabase insert call to save the lead data into the "leads" table before sending the confirmation email.  
+Removed the duplicate confirmation email invocation to streamline the process.
+
+#### Impact  
+✅ Leads are now properly saved to the database  
+✅ Confirmation emails are sent only once per submission  
+✅ Improved data integrity and lead tracking  
+✅ Reduced redundant email traffic and improved performance  
+---
+
+### 2. Fixed Data Index Handling in Confirmation Email Function
+
+**File**: supabase/functions/send-confirmation/index.ts  
+**Severity**: Medium  
+**Status**: Fixed
+
+#### Problem
+
+The confirmation email function had issues correctly handling or logging the email response data index, which could cause problems tracking sent emails or debugging failures.
+
+#### Root Cause
+
+The function did not properly access or log the email response data index, leading to incomplete logs and difficulty in troubleshooting.
+
+#### Fix
+
+Updated the function to correctly access and log the email response data ID from the Resend API response (`emailResponse.data?.id`), improving observability and debugging.
+
+#### Impact
+
+✅ Improved logging and tracking of sent confirmation emails  
+✅ Easier debugging of email sending issues  
+✅ More reliable email confirmation process
+
+---
+
 # Welcome to your Lovable project
 
 ## Project info
@@ -71,3 +132,4 @@ Yes, you can!
 To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
 
 Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+# expert-test
