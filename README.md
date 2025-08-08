@@ -27,10 +27,12 @@ Added a Supabase insert call to save the lead data into the "leads" table before
 Removed the duplicate confirmation email invocation to streamline the process.
 
 #### Impact  
+
 ✅ Leads are now properly saved to the database  
 ✅ Confirmation emails are sent only once per submission  
 ✅ Improved data integrity and lead tracking  
 ✅ Reduced redundant email traffic and improved performance  
+
 ---
 
 ### 2. Fixed Data Index Handling in Confirmation Email Function
